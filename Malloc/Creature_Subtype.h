@@ -1,0 +1,22 @@
+#pragma once
+
+enum Creature_Subtype {
+	UNDEAD = 1,
+	HUMANOID = 2,
+	INSECTOID = 4,
+	ELEMENTAL = 8,
+	SPIRIT = 16,
+	DEMON = 32,
+
+	INCORPOREAL = 64,
+	CORPOREAL = 128,
+
+	FIRE = 256,
+	WATER = 512,
+	EARTH = 1024,
+	AIR = 2048,
+	
+	HOLY = 4096,
+	UNHOLY = 8192
+
+};
