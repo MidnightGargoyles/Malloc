@@ -1,3 +1,6 @@
+*.suo
+*.filters
+
 # Compiled Object files
 *.slo
 *.lo
