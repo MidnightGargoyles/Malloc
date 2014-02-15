@@ -1,4 +1,5 @@
 *.suo
+*.sdf
 *.filters
 
 # Compiled Object files
