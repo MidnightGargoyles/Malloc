@@ -2,8 +2,9 @@
 #include "TextureStore.h"
 #include "SFML\Window\Keyboard.hpp"
 #include "SFML\Graphics\RenderWindow.hpp"
-#include "GameData.h"mPos.y;
-Player::Player() : mSprite(TextureStore::getTexture("res/characters")), mPos(0, 0)
+#include "GameData.h"
+#include "PlayStateData.h"
+Player::Player(const sf::Vector2i startPos) : mSprite(TextureStore::getTexture("res/characters")), mPos(startPos)
 {
 	mSprite.setTextureRect(sf::IntRect(64, 0, 32, 32)); // TODO proper intRect
 	mSprite.setOrigin(16, 16);
@@ -15,8 +16,8 @@ Player::~Player()
 }
 
 
-void Player::update(GameData *gData) {
-	for(auto it = gData->events->begin(); it != gData->events->end(); ++it) {
+void Player::update(GameData &gData, PlayStateData &pData) {
+	for(auto it = gData.events->begin(); it != gData.events->end(); ++it) {
 		switch(it->type) {
 		case sf::Event::KeyPressed:
 			if(it->key.code == sf::Keyboard::W)

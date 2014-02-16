@@ -14,7 +14,7 @@ public:
 	StateList();
 	~StateList();
 	void changeState(State_Type state);
-	void update(GameData *gData);
+	void update(GameData &gData);
 	void draw(sf::RenderWindow &win);
 private:
 	State* mStates[2];

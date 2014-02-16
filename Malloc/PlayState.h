@@ -2,7 +2,7 @@
 
 #include "State.h"
 #include "Player.h"
-
+#include "PlayStateData.h"
 class PlayState : public State
 {
 public:
@@ -10,8 +10,9 @@ public:
 	~PlayState();
 
 	virtual void draw(sf::RenderWindow &win);
-	virtual void update(GameData *gData);
+	virtual void update(GameData &gData);
 private:
 	Player mPlayer;
+	PlayStateData mData;
 };
 
