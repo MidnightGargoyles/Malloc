@@ -6,6 +6,7 @@
 #include <SFML\System\Vector2.hpp>
 
 namespace sf { class RenderWindow; }
+class GameObject;
 class Tile;
 
 class World {
