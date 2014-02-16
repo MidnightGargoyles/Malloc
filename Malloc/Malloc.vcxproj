@@ -82,6 +82,9 @@
     <ClCompile Include="StateList.cpp" />
     <ClCompile Include="TextureStore.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature_Type.h" />
@@ -96,6 +99,9 @@
     <ClInclude Include="StateList.h" />
     <ClInclude Include="TextureStore.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="World.h" />
+    <ClInclude Include="XMLParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
