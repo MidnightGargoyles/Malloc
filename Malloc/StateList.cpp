@@ -34,7 +34,7 @@ void StateList::changeState(State_Type state) {
 	}
 }
 
-void StateList::update(GameData *gData) {
+void StateList::update(GameData &gData) {
 	assert(mCurState != 0);
 	mCurState->update(gData);
 }

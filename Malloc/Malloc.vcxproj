@@ -95,6 +95,7 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="PlayStateData.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
     <ClInclude Include="TextureStore.h" />

@@ -5,10 +5,10 @@
 
 class Player : public GameObject {
 public:
-	Player();
+	Player(const sf::Vector2i startPos);
 	~Player();
 
-	virtual void update(GameData *gData);
+	virtual void update(GameData &gData, PlayStateData &pData);
 	virtual void draw(sf::RenderWindow &win);
 	
 	virtual const sf::Vector2i& getPos() const;
