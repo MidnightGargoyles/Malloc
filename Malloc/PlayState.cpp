@@ -1,7 +1,7 @@
 #include "PlayState.h"
 #include "SFML\Graphics\RenderWindow.hpp"
 
-PlayState::PlayState(StateList &owner) : State(owner), mPlayer(sf::Vector2i(0, 0)), mData() {
+PlayState::PlayState(StateList &owner) : State(owner), mPlayer(sf::Vector2i(4, 6)), mData() {
 	mData.w.loadWorldData("test.tmx");
 }
 
