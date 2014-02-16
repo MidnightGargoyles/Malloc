@@ -11,6 +11,10 @@ public:
 	~Tile();
 	bool isSolid() const;
 	unsigned int getID() const;
+
+	std::vector<GameObject*>& getLoot();
+	GameObject* getCreature();
+	GameObject* getTrap();
 private:
 	unsigned int mID;
 	bool mIsSolid;

@@ -6,6 +6,9 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\Graphics\Sprite.hpp>
 #include "Tile.h"
+#include "GameObject.h"
+#include "GameObject_Type.h"
+#include "Creature_Subtype.h"
 
 bool World::loadWorldData( std::string file ) {
 	static const int solidIds[] = { 0, 1, 2, 3 };
@@ -74,16 +77,42 @@ bool World::loadWorldData( std::string file ) {
 	return parser.parse( file );
 }
 
-unsigned int World::getTileId( unsigned int x, unsigned int y ) {
-	return mTileLayer[x][y]->getID();
+unsigned int World::getTileId( sf::Vector2i position ) {
+	return mTileLayer[position.x][position.x]->getID();
 }
 
-bool World::isSolid(unsigned int x, unsigned int y) const {
-	return mTileLayer[x][y]->isSolid();
+bool World::isSolid( sf::Vector2i position ) const {
+	return mTileLayer[position.x][position.x]->isSolid();
 }
 
 const sf::Vector2i& World::getStartPos() const {
 	return mStartPos;
+}
+
+void World::move( GameObject* obj, sf::Vector2i position ) {
+	Tile* tile = mTileLayer[position.x][position.y];
+	if( tile->isSolid() && !obj->isSubtype( Creature_Subtype::INCORPOREAL ) ) return;
+
+	auto creature = tile->getCreature();
+	if( creature != nullptr ) {
+		obj->act( creature );
+	}
+	else {
+		auto trap = tile->getTrap();
+		auto loot = tile->getLoot();
+		
+		if( trap != nullptr && !trap->isAlly( obj ) )
+			trap->act( obj );
+
+		/*
+		if( loot.size != 0 )
+			showLootMenu( tile->getLoot() );
+		else 
+			hideLootMenu();
+		*/
+
+		obj->setPos(position);
+	}
 }
 
 World::~World() {

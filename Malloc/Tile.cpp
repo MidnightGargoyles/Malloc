@@ -2,7 +2,9 @@
 
 
 Tile::Tile(unsigned int tileID, bool isSolid) : mID(tileID), mIsSolid(isSolid) {
-
+	mCreature = nullptr;
+	mTrap = nullptr;
+	mLoot = std::vector<GameObject*>();
 }
 
 
@@ -16,4 +18,16 @@ bool Tile::isSolid() const {
 
 unsigned int Tile::getID() const {
 	return mID;
+}
+
+std::vector<GameObject*>& Tile::getLoot() {
+	return mLoot;
+}
+
+GameObject* Tile::getCreature() {
+	return mCreature;
+}
+
+GameObject* Tile::getTrap() {
+	return mTrap;
 }

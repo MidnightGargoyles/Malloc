@@ -11,12 +11,14 @@ class Tile;
 class World {
 public:
 	bool loadWorldData( std::string string );
-	unsigned int getTileId( unsigned int x, unsigned int y );
+	unsigned int getTileId( sf::Vector2i position );
 	const sf::Vector2i& getStartPos() const;
 
 	void draw( sf::RenderWindow& win );
 
-	bool isSolid(unsigned int x, unsigned int y) const;
+	bool isSolid(sf::Vector2i position ) const;
+
+	void move( GameObject* obj, sf::Vector2i position );
 
 	~World();
 private:
