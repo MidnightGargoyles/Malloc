@@ -13,6 +13,12 @@ public:
 	
 	virtual const sf::Vector2i& getPos() const;
 	virtual const sf::Vector2i& getTarget() const;
+
+	virtual void setPos( sf::Vector2i pos );
+	virtual void act( GameObject* obj );
+	virtual bool isAlly( GameObject* obj );
+
+	virtual GameObject_Type getObjectType();
 private:
 	sf::Vector2i mPos;
 	sf::Sprite mSprite;

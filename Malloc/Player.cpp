@@ -8,6 +8,7 @@ Player::Player(const sf::Vector2i startPos) : mSprite(TextureStore::getTexture("
 {
 	mSprite.setTextureRect(sf::IntRect(64, 0, 32, 32));
 	mSprite.setOrigin(16, 16);
+	addSubtype(Creature_Subtype::INCORPOREAL);
 }
 
 
@@ -21,21 +22,13 @@ void Player::update(GameData &gData, PlayStateData &pData) {
 		switch(it->type) {
 		case sf::Event::KeyPressed:
 			if(it->key.code == sf::Keyboard::W)
-				if(!pData.w.isSolid(mPos.x, mPos.y - 1))
-					--mPos.y;
+				pData.w.move(this, sf::Vector2i(mPos.x, mPos.y - 1));
 			if(it->key.code == sf::Keyboard::A)
-				if(!pData.w.isSolid(mPos.x - 1, mPos.y)) {
-					mSprite.setScale(-1, 1);
-					--mPos.x;
-				}
+				pData.w.move(this, sf::Vector2i(mPos.x - 1, mPos.y));
 			if(it->key.code == sf::Keyboard::S)
-				if(!pData.w.isSolid(mPos.x, mPos.y + 1))
-					++mPos.y;
+					pData.w.move(this, sf::Vector2i(mPos.x, mPos.y + 1));
 			if(it->key.code == sf::Keyboard::D)
-				if(!pData.w.isSolid(mPos.x + 1, mPos.y)) {
-					mSprite.setScale(1, 1);
-					++mPos.x;
-				}
+				pData.w.move(this, sf::Vector2i(mPos.x + 1, mPos.y));
 			break;
 		}
 	}
@@ -53,3 +46,19 @@ const sf::Vector2i& Player::getPos() const {
 const sf::Vector2i& Player::getTarget() const {
 	return mPos;
 }
+
+void Player::setPos( sf::Vector2i pos ) {
+	mPos = pos;
+}
+
+void Player::act( GameObject* obj ) {
+
+}
+
+bool Player::isAlly( GameObject* obj ) {
+	return obj->getObjectType() == GameObject_Type::PLAYER;
+}
+
+GameObject_Type Player::getObjectType() {
+	return GameObject_Type::PLAYER;
+ }

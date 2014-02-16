@@ -27,3 +27,7 @@ const sf::Vector2i& DireRat::getPos() const {
 const sf::Vector2i& DireRat::getTarget() const {
 	return mPos;
 }
+
+void DireRat::act( GameObject* obj ) {
+
+}

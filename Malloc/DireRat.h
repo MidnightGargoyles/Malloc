@@ -13,6 +13,8 @@ public:
 	
 	virtual const sf::Vector2i& getPos() const;
 	virtual const sf::Vector2i& getTarget() const;
+
+	virtual void act( GameObject* obj );
 private:
 	sf::Vector2i mPos;
 	sf::Sprite mSprite;

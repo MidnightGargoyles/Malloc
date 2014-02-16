@@ -91,7 +91,7 @@ const sf::Vector2i& World::getStartPos() const {
 
 void World::move( GameObject* obj, sf::Vector2i position ) {
 	Tile* tile = mTileLayer[position.x][position.y];
-	if( tile->isSolid() && !obj->isSubtype( Creature_Subtype::INCORPOREAL ) ) return;
+	if( tile != nullptr && tile->isSolid() && !obj->isSubtype( Creature_Subtype::INCORPOREAL ) ) return;
 
 	auto creature = tile->getCreature();
 	if( creature != nullptr ) {
