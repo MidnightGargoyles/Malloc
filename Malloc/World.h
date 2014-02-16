@@ -16,6 +16,8 @@ public:
 
 	void draw( sf::RenderWindow& win );
 
+	bool isSolid(unsigned int x, unsigned int y) const;
+
 	~World();
 private:
 	sf::Sprite mTileset;

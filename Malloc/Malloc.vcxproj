@@ -72,12 +72,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DireRat.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="Shortcut.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
     <ClCompile Include="TextureStore.cpp" />
@@ -87,15 +90,20 @@
     <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Creature_Type.h" />
     <ClInclude Include="Creature_Subtype.h" />
+    <ClInclude Include="DireRat.h" />
+    <ClInclude Include="EnterStateCommand.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="PlayStateData.h" />
+    <ClInclude Include="Shortcut.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
     <ClInclude Include="TextureStore.h" />

@@ -78,6 +78,10 @@ unsigned int World::getTileId( unsigned int x, unsigned int y ) {
 	return mTileLayer[x][y]->getID();
 }
 
+bool World::isSolid(unsigned int x, unsigned int y) const {
+	return mTileLayer[x][y]->isSolid();
+}
+
 const sf::Vector2i& World::getStartPos() const {
 	return mStartPos;
 }

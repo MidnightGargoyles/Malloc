@@ -6,7 +6,7 @@
 #include "PlayStateData.h"
 Player::Player(const sf::Vector2i startPos) : mSprite(TextureStore::getTexture("res/characters")), mPos(startPos)
 {
-	mSprite.setTextureRect(sf::IntRect(64, 0, 32, 32)); // TODO proper intRect
+	mSprite.setTextureRect(sf::IntRect(64, 0, 32, 32));
 	mSprite.setOrigin(16, 16);
 }
 
@@ -21,13 +21,21 @@ void Player::update(GameData &gData, PlayStateData &pData) {
 		switch(it->type) {
 		case sf::Event::KeyPressed:
 			if(it->key.code == sf::Keyboard::W)
-				--mPos.y;
+				if(!pData.w.isSolid(mPos.x, mPos.y - 1))
+					--mPos.y;
 			if(it->key.code == sf::Keyboard::A)
-				--mPos.x;
+				if(!pData.w.isSolid(mPos.x - 1, mPos.y)) {
+					mSprite.setScale(-1, 1);
+					--mPos.x;
+				}
 			if(it->key.code == sf::Keyboard::S)
-				++mPos.y;
+				if(!pData.w.isSolid(mPos.x, mPos.y + 1))
+					++mPos.y;
 			if(it->key.code == sf::Keyboard::D)
-				++mPos.x;
+				if(!pData.w.isSolid(mPos.x + 1, mPos.y)) {
+					mSprite.setScale(1, 1);
+					++mPos.x;
+				}
 			break;
 		}
 	}
