@@ -2,12 +2,12 @@
 #include "tinyxml2.h"
 #include "XMLParser.h"
 #include "TextureStore.h"
-#include <map>
 #include <SFML\Graphics\Texture.hpp>
-#include <vector>
+#include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML\Graphics\Sprite.hpp>
+#include "Tile.h"
 
 bool World::loadWorldData( std::string file ) {
-	std::map< unsigned int, const sf::Texture* > gidToTexture;
 	static const int solidIds[] = { 0, 1, 2, 3 };
 	int x = 0;
 	int y = 0;
@@ -24,31 +24,74 @@ bool World::loadWorldData( std::string file ) {
 		tinyxml2::XMLElement* child = e->FirstChildElement();
 		std::string textureFile = child->Attribute("source");
 		textureFile = textureFile.substr( 0, textureFile.find_last_of('.') );
-		const sf::Texture* texture = &TextureStore::getTexture( textureFile );
-		gidToTexture[gid] = texture;
+		mTileset.setTexture( TextureStore::getTexture( textureFile ) );
 	};
 
-	auto tilehandler = [&](tinyxml2::XMLElement* e) {
+	auto tileHandler = [&](tinyxml2::XMLElement* e) {
+
+		/* This gid will represent the actual index of the texturerect. */
 		unsigned int gid = e->IntAttribute("gid");
+		if( gid == 0 ) {
+			x++;
+			if( x == mWidth ) {
+				x = 0;
+				y++;
+			}
+			return;
+		}
+		gid -= 1;
+
 		bool solid = false;
-		for( unsigned int i : solidIds ) {
-			if( gid != i ) continue;
+		for( auto i : solidIds ) {
+			if ( gid != i ) continue;
 			solid = true;
 			break;
 		}
-		++x;
+
+		mTileLayer[x][y] = new Tile( gid, solid );
+
+		x++;
 		if( x == mWidth ) {
 			x = 0;
-			++y;
+			y++;
 		}
 	};
 
 	ch::XMLParser parser;
 	parser.hook( "map", mapHandler );
-
-	return parser.parse( "test.tmx" );
+	parser.hook( "tileset", tilesetHandler);
+	parser.hook( "tile", tileHandler );
+	return parser.parse( file );
 }
 
 unsigned int World::getTileId( unsigned int x, unsigned int y ) {
-	return 0;
+	return mTileLayer[x][y]->getID();
+}
+
+World::~World() {
+	for( auto row : mTileLayer ) {
+		for( auto tile : row ) {
+			delete tile;
+		}
+	}
+
+}
+
+void World::draw( sf::RenderWindow& win ) {
+	 /* Draw the tiles first */
+	for( int y = 0; y < mHeight; ++y ) {
+		for( int x = 0; x < mWidth; ++x ) {
+			if( mTileLayer[x][y] == nullptr ) continue;
+
+			unsigned int id = mTileLayer[x][y]->getID();
+			int tilesetWidth = mTileset.getTexture()->getSize().x;
+			int col = tilesetWidth / mTileSize;
+			int tileX = id % col;
+			int tileY = id / col;
+
+			mTileset.setTextureRect( sf::IntRect( tileX*mTileSize , tileY*mTileSize, mTileSize, mTileSize ) );
+			mTileset.setPosition( x * mTileSize, y * mTileSize );
+			win.draw( mTileset );
+		}
+	}
 }

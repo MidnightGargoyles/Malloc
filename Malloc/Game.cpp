@@ -1,5 +1,9 @@
 #include "Game.h"
 #include <list>
+#include "World.h"
+#include <iostream>
+
+World w;
 
 Game::Game() : 
 	mWindow(sf::VideoMode(800, 600), "Malloc"),
@@ -16,6 +20,9 @@ Game::~Game()
 }
 
 void Game::start() {
+
+	w.loadWorldData("test.tmx");
+
 	loop();
 }
 
@@ -48,6 +55,6 @@ void Game::draw() {
 	mWindow.clear(sf::Color::Black);
 
 	mStates.draw(mWindow);
-
+	w.draw( mWindow );
 	mWindow.display();
 }
