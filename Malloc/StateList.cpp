@@ -2,6 +2,7 @@
 #include "PlayState.h"
 #include "MenuState.h"
 #include <cassert>
+#include "SFML\Graphics\RenderWindow.hpp"
 
 StateList::StateList() : mCurState(0), mSize(2)
 {
@@ -37,6 +38,6 @@ void StateList::update() {
 	mCurState->update();
 }
 
-void StateList::draw() {
-	mCurState->draw();
+void StateList::draw(sf::RenderWindow &win) {
+	mCurState->draw(win);
 }

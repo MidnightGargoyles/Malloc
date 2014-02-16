@@ -1,11 +1,13 @@
 #include "PlayState.h"
+#include "SFML\Graphics\RenderWindow.hpp"
 
-
-PlayState::PlayState(StateList &owner) : State(owner)
-{
+PlayState::PlayState(StateList &owner) : State(owner), mPlayer() {
 }
 
 
-PlayState::~PlayState(void)
-{
+PlayState::~PlayState() {
+}
+
+void PlayState::draw(sf::RenderWindow &win) {
+	mPlayer.draw(win);
 }

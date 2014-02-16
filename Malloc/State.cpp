@@ -8,6 +8,6 @@ State::State(StateList &owner) : mOwner(owner) {
 void State::update() {
 }
 
-void State::draw() {
+void State::draw(sf::RenderWindow &win) {
 
 }

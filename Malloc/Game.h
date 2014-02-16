@@ -2,6 +2,7 @@
 #include "SFML\Window.hpp"
 #include "SFML\Graphics.hpp"
 #include "StateList.h"
+#include "GameData.h"
 class Game
 {
 public:
@@ -15,5 +16,6 @@ private:
 	sf::RenderWindow mWindow;
 	sf::View mView;
 	StateList mStates;
+	GameData mData;
 };
 

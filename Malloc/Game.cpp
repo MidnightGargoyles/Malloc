@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include <list>
 
 Game::Game() : 
 	mWindow(sf::VideoMode(800, 600), "Malloc"),
@@ -7,6 +7,7 @@ Game::Game() :
 	mStates()
 {
 	mWindow.setView(mView);
+	mStates.changeState(StateList::PLAY);
 }
 
 
@@ -26,6 +27,8 @@ void Game::loop() {
 }
 
 void Game::update() {
+	std::list<sf::Event> events;
+	mData.events = &events;
 	sf::Event evt;
 	while(mWindow.pollEvent(evt)) {
 		switch(evt.type) {
@@ -33,16 +36,18 @@ void Game::update() {
 			mWindow.close();
 			break;
 		default:
+			events.push_back(evt);
 			break;
 		}
 	}
 	mStates.update();
+	mData.events = 0;
 }
 
 void Game::draw() {
 	mWindow.clear(sf::Color::Black);
 
-	mStates.draw();
+	mStates.draw(mWindow);
 
 	mWindow.display();
 }
