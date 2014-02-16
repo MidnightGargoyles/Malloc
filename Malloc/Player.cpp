@@ -3,9 +3,9 @@
 #include "SFML\Window\Keyboard.hpp"
 #include "SFML\Graphics\RenderWindow.hpp"
 #include "GameData.h"mPos.y;
-Player::Player() : mSprite(TextureStore::getTexture("res/Jerrko")), mPos(0, 0)
+Player::Player() : mSprite(TextureStore::getTexture("res/characters")), mPos(0, 0)
 {
-	mSprite.setTextureRect(sf::IntRect(0, 0, 32, 32)); // TODO proper intRect
+	mSprite.setTextureRect(sf::IntRect(64, 0, 32, 32)); // TODO proper intRect
 	mSprite.setOrigin(16, 16);
 }
 

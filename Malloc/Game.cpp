@@ -12,6 +12,7 @@ Game::Game() :
 {
 	mWindow.setView(mView);
 	mWindow.setFramerateLimit(60);
+	mWindow.setKeyRepeatEnabled(false);
 	mStates.changeState(StateList::PLAY);
 }
 
