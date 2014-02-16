@@ -19,6 +19,15 @@ bool World::loadWorldData( std::string file ) {
 		mTileLayer.resize( mWidth, std::vector< Tile* >( mHeight, nullptr ) );
 	};
 
+	auto propertyHandler = [&](tinyxml2::XMLElement* e) {
+		std::string name = e->Attribute("name");
+		if( name == "startpos" ) {
+			std::string position = e->Attribute("value");
+			mStartPos.x = std::stoi( position.substr(0, position.find_first_of(' ') ) );
+			mStartPos.y = std::stoi( position.substr( position.find_first_of(' ') + 1, position.length() -1 ) );
+		}
+	};
+
 	auto tilesetHandler = [&](tinyxml2::XMLElement* e) {
 		unsigned int gid = e->IntAttribute("firstgid");
 		tinyxml2::XMLElement* child = e->FirstChildElement();
@@ -59,6 +68,7 @@ bool World::loadWorldData( std::string file ) {
 
 	ch::XMLParser parser;
 	parser.hook( "map", mapHandler );
+	parser.hook( "property", propertyHandler );
 	parser.hook( "tileset", tilesetHandler);
 	parser.hook( "tile", tileHandler );
 	return parser.parse( file );
@@ -66,6 +76,10 @@ bool World::loadWorldData( std::string file ) {
 
 unsigned int World::getTileId( unsigned int x, unsigned int y ) {
 	return mTileLayer[x][y]->getID();
+}
+
+const sf::Vector2i& World::getStartPos() const {
+	return mStartPos;
 }
 
 World::~World() {
