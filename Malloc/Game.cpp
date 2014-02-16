@@ -11,6 +11,7 @@ Game::Game() :
 	mStates()
 {
 	mWindow.setView(mView);
+	mWindow.setFramerateLimit(60);
 	mStates.changeState(StateList::PLAY);
 }
 
@@ -47,14 +48,14 @@ void Game::update() {
 			break;
 		}
 	}
-	mStates.update();
+	mStates.update(&mData);
 	mData.events = 0;
 }
 
 void Game::draw() {
 	mWindow.clear(sf::Color::Black);
-
-	mStates.draw(mWindow);
 	w.draw( mWindow );
+	mStates.draw(mWindow);
+	
 	mWindow.display();
 }

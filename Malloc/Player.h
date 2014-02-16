@@ -8,7 +8,7 @@ public:
 	Player();
 	~Player();
 
-	virtual void update();
+	virtual void update(GameData *gData);
 	virtual void draw(sf::RenderWindow &win);
 	
 	virtual const sf::Vector2i& getPos() const;

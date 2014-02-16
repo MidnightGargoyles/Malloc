@@ -6,8 +6,9 @@
 
 StateList::StateList() : mCurState(0), mSize(2)
 {
-	mStates[0] = new PlayState(*this);
-	mStates[1] = new MenuState(*this);
+	mStates[0] = new MenuState(*this);
+	mStates[1] = new PlayState(*this);
+	
 	changeState(MENU);
 }
 
@@ -33,9 +34,9 @@ void StateList::changeState(State_Type state) {
 	}
 }
 
-void StateList::update() {
+void StateList::update(GameData *gData) {
 	assert(mCurState != 0);
-	mCurState->update();
+	mCurState->update(gData);
 }
 
 void StateList::draw(sf::RenderWindow &win) {

@@ -2,7 +2,8 @@
 #include "TextureStore.h"
 #include "SFML\Window\Keyboard.hpp"
 #include "SFML\Graphics\RenderWindow.hpp"
-Player::Player() : mSprite(TextureStore::getTexture(""))
+#include "GameData.h"mPos.y;
+Player::Player() : mSprite(TextureStore::getTexture("res/Jerrko")), mPos(0, 0)
 {
 	mSprite.setTextureRect(sf::IntRect(0, 0, 32, 32)); // TODO proper intRect
 	mSprite.setOrigin(16, 16);
@@ -14,15 +15,21 @@ Player::~Player()
 }
 
 
-void Player::update() {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		++mPos.y;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		--mPos.y;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		--mPos.x;
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		++mPos.x;
+void Player::update(GameData *gData) {
+	for(auto it = gData->events->begin(); it != gData->events->end(); ++it) {
+		switch(it->type) {
+		case sf::Event::KeyPressed:
+			if(it->key.code == sf::Keyboard::W)
+				--mPos.y;
+			if(it->key.code == sf::Keyboard::A)
+				--mPos.x;
+			if(it->key.code == sf::Keyboard::S)
+				++mPos.y;
+			if(it->key.code == sf::Keyboard::D)
+				++mPos.x;
+			break;
+		}
+	}
 }
 
 void Player::draw(sf::RenderWindow &win) {

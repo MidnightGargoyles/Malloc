@@ -2,6 +2,7 @@
 namespace sf {
 	class RenderWindow;
 };
+struct GameData;
 #include "State.h"
 
 class StateList
@@ -13,7 +14,7 @@ public:
 	StateList();
 	~StateList();
 	void changeState(State_Type state);
-	void update();
+	void update(GameData *gData);
 	void draw(sf::RenderWindow &win);
 private:
 	State* mStates[2];

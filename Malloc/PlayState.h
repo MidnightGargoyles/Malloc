@@ -10,6 +10,7 @@ public:
 	~PlayState();
 
 	virtual void draw(sf::RenderWindow &win);
+	virtual void update(GameData *gData);
 private:
 	Player mPlayer;
 };
