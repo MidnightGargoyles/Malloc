@@ -1,8 +1,9 @@
 #include "PlayState.h"
 #include "SFML\Graphics\RenderWindow.hpp"
-
-PlayState::PlayState(StateList &owner) : State(owner), mPlayer(sf::Vector2i(0, 0)), mData() {
+#include "Player.h"
+PlayState::PlayState(StateList &owner) : State(owner), mData() {
 	mData.w.loadWorldData("test.tmx");
+	mData.player = new Player(mData.w.getStartPos());
 }
 
 
@@ -11,9 +12,9 @@ PlayState::~PlayState() {
 
 void PlayState::draw(sf::RenderWindow &win) {
 	mData.w.draw(win);
-	mPlayer.draw(win);
+	mData.player->draw(win);
 }
 
 void PlayState::update(GameData &gData) {
-	mPlayer.update(gData, mData);
+	mData.player->update(gData, mData);
 }
