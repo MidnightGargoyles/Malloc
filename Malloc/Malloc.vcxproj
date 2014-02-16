@@ -73,6 +73,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DireRat.cpp" />
+    <ClCompile Include="EnterStateCommand.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="Creature_Type.h" />
     <ClInclude Include="Creature_Subtype.h" />
+    <ClInclude Include="Difficulty.h" />
     <ClInclude Include="DireRat.h" />
     <ClInclude Include="EnterStateCommand.h" />
     <ClInclude Include="Game.h" />

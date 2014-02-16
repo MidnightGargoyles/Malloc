@@ -3,17 +3,26 @@
 #include "World.h"
 #include <iostream>
 
+sf::Vector2f operator*(const sf::Vector2f& v0, const sf::Vector2f& v1) {
+	return sf::Vector2f(v0.x*v1.x, v0.y*v1.y);
+}
 
+sf::Vector2f operator/(const sf::Vector2f& v0, const sf::Vector2f& v1) {
+	return sf::Vector2f(v0.x/v1.x, v0.y/v1.y);
+}
 
 Game::Game() : 
 	mWindow(sf::VideoMode(800, 600), "Malloc"),
 	mView(sf::FloatRect(0, 0, 800, 600)),
-	mStates()
+	mData(),
+	mStates(mData)
+	
 {
 	mWindow.setView(mView);
 	mWindow.setFramerateLimit(60);
 	mWindow.setKeyRepeatEnabled(false);
-	mStates.changeState(StateList::PLAY);
+	mStates.changeState(StateList::MENU);
+	
 }
 
 
@@ -46,6 +55,10 @@ void Game::update() {
 			break;
 		}
 	}
+	mData.mousePos = ((sf::Vector2f)sf::Mouse::getPosition(mWindow) * (sf::Vector2f)mView.getSize()/(sf::Vector2f)mWindow.getSize());
+
+	
+
 	mStates.update(mData);
 	mData.events = 0;
 }

@@ -4,9 +4,9 @@
 #include <cassert>
 #include "SFML\Graphics\RenderWindow.hpp"
 
-StateList::StateList() : mCurState(0), mSize(2)
+StateList::StateList(GameData &gData) : mCurState(0), mSize(2)
 {
-	mStates[0] = new MenuState(*this);
+	mStates[0] = new MenuState(*this, gData);
 	mStates[1] = new PlayState(*this);
 	
 	changeState(MENU);

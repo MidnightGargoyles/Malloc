@@ -11,7 +11,7 @@ public:
 	enum State_Type {
 		MENU, PLAY
 	};
-	StateList();
+	StateList(GameData &gData);
 	~StateList();
 	void changeState(State_Type state);
 	void update(GameData &gData);

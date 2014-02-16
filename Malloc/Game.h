@@ -15,7 +15,7 @@ private:
 	void draw();
 	sf::RenderWindow mWindow;
 	sf::View mView;
-	StateList mStates;
 	GameData mData;
+	StateList mStates;
 };
 
